@@ -91,6 +91,9 @@ public abstract class AbstractInsnNode {
   /** The opcode of this instruction. */
   protected int opcode;
 
+  /** The byteCodeOffset of this instruction. */
+  private int bytecodeOffset;
+
   /**
    * The runtime visible type annotations of this instruction. This field is only used for real
    * instructions (i.e. not for labels, frames, or line number nodes). This list is a list of {@link
@@ -126,6 +129,7 @@ public abstract class AbstractInsnNode {
   protected AbstractInsnNode(final int opcode) {
     this.opcode = opcode;
     this.index = -1;
+    this.bytecodeOffset = -1;
   }
 
   /**
@@ -261,5 +265,23 @@ public abstract class AbstractInsnNode {
       }
     }
     return this;
+  }
+
+  /**
+   * Sets the byte code offset of the Instruction.
+   *
+   * @param offset . This is the offset of the instruction.
+   */
+  public void setBytecodeOffset(final int offset) {
+    this.bytecodeOffset = offset;
+  }
+
+  /**
+   * Returns the bytecode offset of the instruction.
+   *
+   * @return offset.
+   */
+  public int getBytecodeOffset() {
+    return this.bytecodeOffset;
   }
 }

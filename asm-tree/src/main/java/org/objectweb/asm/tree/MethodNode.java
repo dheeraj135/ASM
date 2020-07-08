@@ -771,4 +771,11 @@ public class MethodNode extends MethodVisitor {
     }
     methodVisitor.visitEnd();
   }
+
+  @Override
+  public void setByteCodeOffset(final int offset) {
+    if (this.instructions.size() > 0) {
+      this.instructions.getLast().setBytecodeOffset(offset);
+    }
+  }
 }

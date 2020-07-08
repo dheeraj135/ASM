@@ -2066,6 +2066,9 @@ public class ClassReader {
 
       // Visit the instruction at this bytecode offset.
       int opcode = classBuffer[currentOffset] & 0xFF;
+
+      int prevOffset = currentOffset;
+
       switch (opcode) {
         case Opcodes.NOP:
         case Opcodes.ACONST_NULL:
@@ -2460,6 +2463,8 @@ public class ClassReader {
         default:
           throw new AssertionError();
       }
+
+      methodVisitor.setByteCodeOffset(prevOffset - bytecodeStartOffset);
 
       // Visit the runtime visible instruction annotations, if any.
       while (visibleTypeAnnotationOffsets != null
